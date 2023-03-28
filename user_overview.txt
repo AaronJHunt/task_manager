@@ -1,0 +1,27 @@
+-------------------------------
+User Overview Report
+-------------------------------
+Number of users: 		3
+Total tasks generated: 	4
+User Tasks breakdown :- 
+	Username: 			admin
+	Assigned tasks: 		2
+	Percentage assigned(%): 50.0%
+	Completed user tasks: 	100.0%
+	Incomplete user tasks: 	0.0%
+	Overdue user tasks: 	0.0%
+
+	Username: 			aaron
+	Assigned tasks: 		2
+	Percentage assigned(%): 50.0%
+	Completed user tasks: 	0.0%
+	Incomplete user tasks: 	100.0%
+	Overdue user tasks: 	50.0%
+
+	Username: 			reece
+	Assigned tasks: 		0
+	Percentage assigned(%): 0.0%
+	Completed user tasks: 	0%
+	Incomplete user tasks: 	0%
+	Overdue user tasks: 	0%
+
