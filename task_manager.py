@@ -323,15 +323,15 @@ def generate_reports():
     tasks_percentage_overdue = round((tasks_overdue / tasks_generated) * 100,2)
 
     # Building the string to save to task_overview.txt
-    task_overview_str = "-------------------------------\n"
+    task_overview_str = "-----------------------------------\n"
     task_overview_str += "Tasks Overview Report\n"
-    task_overview_str += "-------------------------------\n"
-    task_overview_str += f"Generated:\t\t\t\t {tasks_generated}\n"
-    task_overview_str += f"Completed:\t\t\t\t {tasks_completed}\n"
-    task_overview_str += f"Uncompleted:\t\t\t {tasks_uncompleted}\n"
-    task_overview_str += f"Overdue: \t\t\t\t {tasks_overdue}\n"
-    task_overview_str += f"Percentage incomplete: \t {tasks_percentage_incomplete}%\n"
-    task_overview_str += f"Percentage Overdue: \t {tasks_percentage_overdue}%"
+    task_overview_str += "-----------------------------------\n"
+    task_overview_str += f"Generated:\t\t{tasks_generated}\n"
+    task_overview_str += f"Completed:\t\t{tasks_completed}\n"
+    task_overview_str += f"Uncompleted:\t\t{tasks_uncompleted}\n"
+    task_overview_str += f"Overdue: \t\t{tasks_overdue}\n"
+    task_overview_str += f"Percentage incomplete:\t{tasks_percentage_incomplete}%\n"
+    task_overview_str += f"Percentage Overdue:\t{tasks_percentage_overdue}%"
     #print(task_overview_str)
 
     with open('task_overview.txt', 'w') as f:
@@ -343,10 +343,10 @@ def generate_reports():
     tasks_generated = len(task_list)
 
     # Building user overview string
-    user_overview_str = "-------------------------------\n"
+    user_overview_str = "-----------------------------------\n"
     user_overview_str += "User Overview Report\n"
-    user_overview_str += "-------------------------------\n"
-    user_overview_str += f"Number of users: \t\t{user_number}\n"
+    user_overview_str += "-----------------------------------\n"
+    user_overview_str += f"Number of users: \t{user_number}\n"
     user_overview_str += f"Total tasks generated: \t{tasks_generated}\n"
     user_overview_str += "User Tasks breakdown :- \n"
 
@@ -392,12 +392,12 @@ def generate_reports():
             user_tasks_overdue_p = 0
 
         # user specific additions to the user overview string
-        user_overview_str += f"\tUsername: \t\t\t{user}\n"
-        user_overview_str += f"\tAssigned tasks: \t\t{user_tasks}\n"
-        user_overview_str += f"\tPercentage assigned(%): {user_tasks_p}%\n"
-        user_overview_str += f"\tCompleted user tasks: \t{user_tasks_completed_p}%\n"
-        user_overview_str += f"\tIncomplete user tasks: \t{user_tasks_incomplete_p}%\n"
-        user_overview_str += f"\tOverdue user tasks: \t{user_tasks_overdue_p}%\n"
+        user_overview_str += f"\tUsername:\t\t{user}\n"
+        user_overview_str += f"\tAssigned tasks:\t\t{user_tasks}\n"
+        user_overview_str += f"\tPercentage assigned(%):\t{user_tasks_p}%\n"
+        user_overview_str += f"\tCompleted user tasks:\t{user_tasks_completed_p}%\n"
+        user_overview_str += f"\tIncomplete user tasks:\t{user_tasks_incomplete_p}%\n"
+        user_overview_str += f"\tOverdue user tasks:\t{user_tasks_overdue_p}%\n"
         user_overview_str += "\n"
     
     # save string to user_overview.txt
@@ -417,7 +417,8 @@ def display_stats():
     # if it doesnt exist we create a blank file
     try:
         with open('tasks.txt', 'r') as tasks:
-            num_tasks = len(tasks.readlines())
+            tasks_contents = tasks.readlines()
+            
     except FileNotFoundError:
         with open('tasks.txt', 'w') as tasks:
             tasks.write()
@@ -426,7 +427,7 @@ def display_stats():
     # if it doesnt we create the file with admin set up
     try:
         with open('user.txt', 'r') as users:
-            num_users = len(users.readlines())
+            users_contents = users.readlines()
     except FileNotFoundError:
         with open('user.txt', 'w') as users:
             users.write("admin;password")
@@ -435,9 +436,27 @@ def display_stats():
     print("-----------------------------------")
     print("Statistics")
     print("-----------------------------------")
-    print(f"Number of users: \t\t {num_users}")
-    print(f"Number of tasks: \t\t {num_tasks}")
-    print("-----------------------------------")  
+    print(f"Number of users: \t\t {len(users_contents)}")
+    print(f"Number of tasks: \t\t {len(tasks_contents)}")
+
+    # Check if the overview files exist, if not then call generate_reports()
+    if not os.path.exists("task_overview.txt") or not os.path.exists("user_overview.txt"):
+        generate_reports()
+    else:
+        pass
+
+    # open the task_overview.txt file and display contents in terminal
+    with open('task_overview.txt', 'r') as to:
+        task_overview = to.read()
+        print(task_overview)
+
+    # open the user_overview.txt file and display contents in terminal 
+    with open('user_overview.txt', 'r') as uo:
+        user_overview = uo.read()
+        print(user_overview)
+        
+
+        
 
 while True:
     # presenting the menu to the user and 
@@ -471,6 +490,8 @@ while True:
     
     elif menu == 'ds' and curr_user == 'admin': 
         display_stats()
+    elif menu == 'ds' and curr_user != 'admin':
+        print("Only the admin can access this option.")
 
     elif menu == 'e':
         print('Goodbye!!!')
