@@ -6,9 +6,15 @@ Copy all files to local machine contained in its own folder.
 
 ## Usage
 1. To start application first run the task_manager.py file
-2. You will need to login using your credentials
-3. Once logged in you will be presented with a menu
-4. Select an option you would like to use and follow onscreen prompts
+ 
+2. You will need to login using your credentials<br />
+![ScreenShot of login](screenshots/1-login.png)
+
+3. Once logged in you will be presented with a menu<br />
+![Screenshot of menu](screenshots/2-menu.png)
+
+4. Select an option you would like to use and follow onscreen prompts<br />
+![Screenshot of option](screenshots/3-Select%20option.png)
 
 ## Credits
 Created by Aaron Hunt
